@@ -1,0 +1,28 @@
+{
+  "functions": {
+    "source": "functions"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "kita-hack-486915",
+          "appId": "1:306961544903:android:350d507fd4d081a1a6b0e2",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "kita-hack-486915",
+          "configurations": {
+            "android": "1:306961544903:android:350d507fd4d081a1a6b0e2",
+            "ios": "1:306961544903:ios:9e84f7d697af8daba6b0e2",
+            "macos": "1:306961544903:ios:9e84f7d697af8daba6b0e2",
+            "web": "1:306961544903:web:799b8703d436c0f2a6b0e2",
+            "windows": "1:306961544903:web:ebb127123e894d47a6b0e2"
+          }
+        }
+      }
+    }
+  }
+}
