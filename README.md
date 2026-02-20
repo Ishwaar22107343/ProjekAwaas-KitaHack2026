@@ -62,6 +62,7 @@ The project follows a fully serverless, event-driven architecture.
 
 This repository is organized into two main parts to reflect the separation of frontend and backend code.
 
+```text
 /
 ├── flood_app/ # Contains the complete Flutter mobile application source code.
 │ ├── lib/
@@ -74,6 +75,7 @@ This repository is organized into two main parts to reflect the separation of fr
 │ └── requirements.txt
 │
 └── README.md # This file.
+```
 
 ---
 
