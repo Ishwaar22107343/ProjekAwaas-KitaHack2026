@@ -85,12 +85,12 @@ def analyzeimageonupload(cloud_event):
         --- IF POV IS 'PEDESTRIAN' ---
         1.  **Current First:** If you see any significant strong current, the decision is "TURN_BACK". Reason: "Flowing water is dangerous to walk through and can easily cause a fall." Confidence should be high.
         2.  **Depth Second:** 
-	If the water is perfectly still:
+	If the water is perfectly still or flowing slowly:
             - Water is at or below waist-level: "PROCEED". Reason: "Water is below waist level. Proceed with caution and watch your step."
             - Water is above wasit-level: "TURN_BACK". Reason: "Water is too deep to walk in safely. Hidden obstacles or uneven ground pose a significant risk."
-	If the water flowing slowly (no strong current):
-	    - Water is at or below knee-level: "PROCEED". Reason: "Water is shallow and weak current. Procced with caution and watch your step."
-	    - Water above knee-level: "TURN_BACK". Reason: "Water is deep with weal current. Stabiity challenged in flowing water."  
+	If the water has strong current:
+	    - Water is at or below knee-level: "PROCEED". Reason: "Water is shallow. Procced with caution and watch your step."
+	    - Water above knee-level: "TURN_BACK". Reason: "Water is deep with strong current. Stabiity challenged in flowing water."  
 
         --- FALLBACK RULES (Apply to both POVs) ---
         - If you cannot reliably assess conditions (e.g., bad lighting, blurry, no reference points), err on the side of caution. Decision: "TURN_BACK", Reason: "Unable to reliably assess flood risk from the image."
