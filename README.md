@@ -133,13 +133,13 @@ gcloud functions deploy process_flood_image \
 Developing "Projek Awaas" presented several technical hurdles, primarily related to securing efficient data flow and authentication between mobile and cloud services:
 
 **1. Direct Google Cloud Storage (GCS) Integration & Authentication:**
-Initially, we explored uploading images directly to GCS and importing them from there for AI prompting. However, integrating GCS directly with the mobile app proved complex due to the authentication requirements. Our use of anonymous Firebase authentication for the mobile app did not seamlessly translate to GCS, making direct secure access difficult for a prototype. Firebase Storage offered a more streamlined and efficient solution for image uploads within our mobile ecosystem.
+- Initially, we explored uploading images directly to GCS and importing them from there for AI prompting. However, integrating GCS directly with the mobile app proved complex due to the authentication requirements. Our use of anonymous Firebase authentication for the mobile app did not seamlessly translate to GCS, making direct secure access difficult for a prototype. Firebase Storage offered a more streamlined and efficient solution for image uploads within our mobile ecosystem.
 
 **2. Cross-Service Authentication (App to Gemini via Firebase):**
-Another challenge arose when the application manually attempted to call the Gemini API directly from the app, expecting Gemini to then import the picture from Firebase Storage. This setup encountered authentication issues, as Firebase's security mechanisms prevented direct unauthorized access from Gemini services to user-uploaded content. The challenge was to establish a secure and authenticated channel for the image to reach the AI model.
+- Another challenge arose when the application manually attempted to call the Gemini API directly from the app, expecting Gemini to then import the picture from Firebase Storage. This setup encountered authentication issues, as Firebase's security mechanisms prevented direct unauthorized access from Gemini services to user-uploaded content. The challenge was to establish a secure and authenticated channel for the image to reach the AI model.
 
 **Solution:**
-The breakthrough came with implementing an event-driven architecture leveraging Google Cloud Functions. By having the Flutter app upload the image to Firebase Storage, we could trigger a Cloud Function (process_flood_image) upon new file uploads. This intermediary Cloud Function, running within the Google Cloud ecosystem, inherently possesses the necessary permissions to access Firebase Storage and invoke Vertex AI (Gemini). This setup resolved the authentication barrier, allowing seamless communication between Firebase, Google Cloud Functions, and Vertex AI, effectively bypassing the security complexities of direct client-to-cloud AI interaction while maintaining the serverless and scalable nature of the project.
+- The breakthrough came with implementing an event-driven architecture leveraging Google Cloud Functions. By having the Flutter app upload the image to Firebase Storage, we could trigger a Cloud Function (process_flood_image) upon new file uploads. This intermediary Cloud Function, running within the Google Cloud ecosystem, inherently possesses the necessary permissions to access Firebase Storage and invoke Vertex AI (Gemini). This setup resolved the authentication barrier, allowing seamless communication between Firebase, Google Cloud Functions, and Vertex AI, effectively bypassing the security complexities of direct client-to-cloud AI interaction while maintaining the serverless and scalable nature of the project.
 
 ---
 
@@ -160,4 +160,8 @@ The breakthrough came with implementing an event-driven architecture leveraging 
 
 ---
 
-- Security note: The firebase_options.dart file in this repository contains placeholder API keys. In a real-world public scenario, these should be secured and managed via environment variables or a more secure configuration method. For this hackathon submission, they are included for ease of evaluation.
+### Security note: 
+
+- The firebase_options.dart file in this repository contains placeholder API keys. In a real-world public scenario, these should be secured and managed via environment variables or a more secure configuration method. For this hackathon submission, they are included for ease of evaluation.
+
+---
