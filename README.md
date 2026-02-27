@@ -128,4 +128,36 @@ gcloud functions deploy process_flood_image \
 
 ---
 
+### 🚧 Challenges Faced
+
+Developing "Projek Awaas" presented several technical hurdles, primarily related to securing efficient data flow and authentication between mobile and cloud services:
+
+**1. Direct Google Cloud Storage (GCS) Integration & Authentication:**
+Initially, we explored uploading images directly to GCS and importing them from there for AI prompting. However, integrating GCS directly with the mobile app proved complex due to the authentication requirements. Our use of anonymous Firebase authentication for the mobile app did not seamlessly translate to GCS, making direct secure access difficult for a prototype. Firebase Storage offered a more streamlined and efficient solution for image uploads within our mobile ecosystem.
+
+**2. Cross-Service Authentication (App to Gemini via Firebase):**
+Another challenge arose when the application manually attempted to call the Gemini API directly from the app, expecting Gemini to then import the picture from Firebase Storage. This setup encountered authentication issues, as Firebase's security mechanisms prevented direct unauthorized access from Gemini services to user-uploaded content. The challenge was to establish a secure and authenticated channel for the image to reach the AI model.
+
+**Solution:**
+The breakthrough came with implementing an event-driven architecture leveraging Google Cloud Functions. By having the Flutter app upload the image to Firebase Storage, we could trigger a Cloud Function (process_flood_image) upon new file uploads. This intermediary Cloud Function, running within the Google Cloud ecosystem, inherently possesses the necessary permissions to access Firebase Storage and invoke Vertex AI (Gemini). This setup resolved the authentication barrier, allowing seamless communication between Firebase, Google Cloud Functions, and Vertex AI, effectively bypassing the security complexities of direct client-to-cloud AI interaction while maintaining the serverless and scalable nature of the project.
+
+---
+
+### Roadmap and Future Enhancements
+
+"Projek Awaas" currently provides real-time flood analysis for static images. Our vision for the future includes expanding its capabilities significantly to offer more dynamic and comprehensive flood assessment and community-driven data collection:
+
+**1. Video Analysis for Advanced Flood Assessment:**
+- Enhanced AI Models: Future iterations will incorporate video analysis capabilities. Instead of just static images, the AI model will be able to process video streams of flooded roads.
+- Dynamic Data Points: This will allow for the assessment of dynamic factors such as water flowing speed, balance (e.g., how steady a person or object is in the water), and even the sound of the water stream. These additional data points will significantly improve the AI's ability to gauge the true risk and provide more accurate "PROCEED" or "TURN BACK" decisions.
+- Contextual Understanding: Analyzing movement and sound will give the AI a richer contextual understanding of the flood situation, beyond what a single image can convey.
+
+**2. Public, Real-Time, Street-Level Flood Database:**
+- User-Contributed Data: We plan to implement a feature where every user-submitted photo or video, along with its AI analysis result ("PROCEED" or "TURN BACK"), will be anonymized and saved to a public database, tagged with its precise location.
+- Hyper-Local Accuracy: This database will provide real-time, street-level accuracy of flood conditions, offering a significant improvement over existing regional flood maps. Users won't need to physically be present to assess a location; they can check the app for the latest community-reported status.
+- Dynamic Updates: The information for a particular location will be continuously updated by new user submissions, ensuring the data remains current and relevant.
+- Automatic Refresh: The system will intelligently refresh or mark data as "cleared" once floodwaters at a specific location are observed to recede, providing an up-to-date picture of accessible roads.
+
+---
+
 - Security note: The firebase_options.dart file in this repository contains placeholder API keys. In a real-world public scenario, these should be secured and managed via environment variables or a more secure configuration method. For this hackathon submission, they are included for ease of evaluation.
