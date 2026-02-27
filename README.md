@@ -51,7 +51,7 @@ The project follows a fully serverless, event-driven architecture.
 
 *   **Frontend**: Flutter, Dart
 *   **Backend**: Google Cloud Functions (Python 3.12)
-*   **AI Model**: Vertex AI with `gemini-1.5-pro-001` / `gemini-2.5-flash`
+*   **AI Model**: Vertex AI with `gemini-2.5-flash`
 *   **Database**: Cloud Firestore
 *   **Storage**: Firebase Storage
 *   **Authentication**: Firebase Authentication (Anonymous)
