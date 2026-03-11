@@ -19,7 +19,7 @@ This project directly addresses the challenges of climate change and urban safet
 
 ### :movie_camera: 5-Minute Demo Video
 
-[Link to Your 5-Minute Project Demo Video Here]
+[https://drive.google.com/file/d/1rD8U1OzvAKSu9Ypd5xlAKBvR50PxB5QK/view?usp=drivesdk]
 
 ---
 
