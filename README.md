@@ -82,40 +82,65 @@ This repository is organized into two main parts to reflect the separation of fr
 ### 🚀 Setup and Installation
 
 **Prerequisites:**
-*   Flutter SDK (version >=3.0.0)
-*   Google Cloud SDK (for deploying the function)
-*   Firebase CLI
+*   A Google Cloud account with a Firebase project created.
+*   Flutter SDK (v3.19 or newer recommended).
+*   Google Cloud SDK installed and authenticated (`gcloud auth login`).
+*   Firebase CLI installed and authenticated (`firebase login`).
 
-#### 1. Frontend (Flutter App)
+#### 1. Clone the Repository
 
-The app is configured via FlutterFire and should work out-of-the-box if the Firebase project is set up.
+```bash
+git clone https://github.com/Ishwaar22107343/ProjekAwaas-KitaHack2026.git
+cd ProjekAwaas-KitaHack2026
+```
+
+#### 2. Configure the Flutter App (Frontend)
+
+- The Flutter app connects to Firebase using configuration files that are not included in this repository for security. 
+- You must generate them for your own Firebase project.
 
 ```bash
 # Navigate to the app directory
 cd flood_app
 
-# Install dependencies
+# Use the FlutterFire CLI to generate the configuration
+# This will create the required lib/firebase_options.dart file
+flutterfire configure
+```
+
+- Next, add the Android configuration file:
+
+1. Go to your Firebase Project Settings -> General tab.
+2. In the "Your apps" section, select your Android app.
+3. Download the google-services.json file.
+4. Place this file inside the flood_app/android/app/ directory.
+
+#### 3. Run the Flutter App
+
+- With the configuration in place, you can now run the app.
+
+```bash
+# Install all required Dart packages
 flutter pub get
 
 # Run the app on a connected device or emulator
 flutter run
 ```
-#### 2. Backend (Cloud Function)
+#### 4. Deploy the cloud function
 
-The function process_flood_image is triggered by file uploads to the Firebase Storage bucket.
+- The backend logic is an event-driven Cloud Function. To deploy it, you need to provide your project-specific details.
 
-**IAM Permissions Required for the Function's Service Account:**
-*   Vertex AI User: To call the Gemini model.
-*   Cloud Datastore User: To update Firestore.
-*   Storage Object Viewer: To read the image from the bucket.
-
-**Deployment:**
-
-To deploy the function, navigate to the cloud_function directory and use the gcloud CLI.
+Note: Before deploying, ensure the function's service account has the following IAM roles: 
+1. Vertex AI User
+2. Cloud Datastore User 
+3. Storage Object Viewer.
 
 ```bash
-cd cloud_function
+# Navigate to the function's directory
+cd ../cloud_function
 
+# Deploy the function using gcloud
+# IMPORTANT: Replace the placeholders <...> with your actual values.
 gcloud functions deploy process_flood_image \
 --gen2 \
 --runtime=python312 \
@@ -125,6 +150,8 @@ gcloud functions deploy process_flood_image \
 --trigger-event-filters="type=google.storage.object.finalize" \
 --trigger-event-filters="bucket=<YOUR_STORAGE_BUCKET_NAME>"
 ```
+
+You can find your Cloud Storage bucket name in the Firebase Console under Storage.
 
 ---
 
@@ -157,11 +184,5 @@ Developing "Projek Awaas" presented several technical hurdles, primarily related
 - Hyper-Local Accuracy: This database will provide real-time, street-level accuracy of flood conditions, offering a significant improvement over existing regional flood maps. Users won't need to physically be present to assess a location; they can check the app for the latest community-reported status.
 - Dynamic Updates: The information for a particular location will be continuously updated by new user submissions, ensuring the data remains current and relevant.
 - Automatic Refresh: The system will intelligently refresh or mark data as "cleared" once floodwaters at a specific location are observed to recede, providing an up-to-date picture of accessible roads.
-
----
-
-### Security note: 
-
-- The firebase_options.dart file in this repository contains placeholder API keys. In a real-world public scenario, these should be secured and managed via environment variables or a more secure configuration method. For this hackathon submission, they are included for ease of evaluation.
 
 ---

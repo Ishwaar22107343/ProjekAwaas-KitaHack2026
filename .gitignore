@@ -24,3 +24,9 @@ Flutter
 /android/app/build/
 /android/build/
 /android/app/google-services.json
+
+Firebase
+
+lib/firebase_options.dart
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
