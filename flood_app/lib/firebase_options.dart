@@ -1,0 +1,76 @@
+import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+
+class DefaultFirebaseOptions {
+  static FirebaseOptions get currentPlatform {
+    if (kIsWeb) {
+      return web;
+    }
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        return android;
+      case TargetPlatform.iOS:
+        return ios;
+      case TargetPlatform.macOS:
+        return macos;
+      case TargetPlatform.windows:
+        return windows;
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      default:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions are not supported for this platform.',
+        );
+    }
+  }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDlb94VtGowrrlY3g6h2oyDPujXVUtO7IE',
+    appId: '1:306961544903:web:799b8703d436c0f2a6b0e2',
+    messagingSenderId: '306961544903',
+    projectId: 'kita-hack-486915',
+    authDomain: 'kita-hack-486915.firebaseapp.com',
+    storageBucket: 'kita-hack-486915.firebasestorage.app',
+    measurementId: 'G-2VP8SEL7F7',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyBkXuFmDvfMRTGbFVPFJ-d9m5QD75Lt-qQ',
+    appId: '1:306961544903:android:350d507fd4d081a1a6b0e2',
+    messagingSenderId: '306961544903',
+    projectId: 'kita-hack-486915',
+    storageBucket: 'kita-hack-486915.firebasestorage.app',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDFeL77o74g8DOb7E4tkiRlnCwpdZhogxk',
+    appId: '1:306961544903:ios:9e84f7d697af8daba6b0e2',
+    messagingSenderId: '306961544903',
+    projectId: 'kita-hack-486915',
+    storageBucket: 'kita-hack-486915.firebasestorage.app',
+    iosBundleId: 'com.example.floodApp',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDFeL77o74g8DOb7E4tkiRlnCwpdZhogxk',
+    appId: '1:306961544903:ios:9e84f7d697af8daba6b0e2',
+    messagingSenderId: '306961544903',
+    projectId: 'kita-hack-486915',
+    storageBucket: 'kita-hack-486915.firebasestorage.app',
+    iosBundleId: 'com.example.floodApp',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDlb94VtGowrrlY3g6h2oyDPujXVUtO7IE',
+    appId: '1:306961544903:web:ebb127123e894d47a6b0e2',
+    messagingSenderId: '306961544903',
+    projectId: 'kita-hack-486915',
+    authDomain: 'kita-hack-486915.firebaseapp.com',
+    storageBucket: 'kita-hack-486915.firebasestorage.app',
+    measurementId: 'G-W3TTW988CF',
+  );
+}
